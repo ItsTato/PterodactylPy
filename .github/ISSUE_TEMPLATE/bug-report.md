@@ -35,6 +35,7 @@ If applicable, add screenshots to help explain your problem.
 Add any other context about the problem here.
 
 ## Agreements
-- [ ] I have checked all currently opened issues and made sure mine is not a clone
-- [ ] I agree to be nice and follow general internet non-toxicity rules
-- [ ] I believe my report is valid and not a misuse of the package by my part
+By posting, you agree to the following:
+- [x] I have checked all currently opened issues and made sure mine is not a clone
+- [x] I agree to be nice and follow general internet non-toxicity rules
+- [x] I believe my report is valid and not a misuse of the package by my part
