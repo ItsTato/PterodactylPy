@@ -15,9 +15,7 @@ class PterodactylException(Exception):
 		return self.__message
 
 class NotFoundHttpException(PterodactylException):
-	def __init__(self,detail:str,status:int):
-		super().__init__(detail,status)
+	pass
 
 class ValidationException(PterodactylException):
-	def __init__(self,detail:str,status:int):
-		super().__init__(detail,status)
+	pass
