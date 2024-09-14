@@ -14,6 +14,9 @@ class PterodactylException(Exception):
 	def message(self) -> str:
 		return self.__message
 
+# Exceptions based on actual errors the panel may return.
+# If you know of any missing exceptions here, please just add it and submit a pull request!
+
 class NotFoundHttpException(PterodactylException):
 	pass
 
