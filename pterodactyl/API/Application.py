@@ -57,7 +57,7 @@ class Application:
 		list = get_users
 		list_users = get_users
 
-		def get_user(self,user_id:int) -> User|None:
+		def get_user(self,user_id:int) -> User:
 			"""
 			Get a user based on their ID.
 			:param user_id: The ID of the user.
@@ -84,7 +84,7 @@ class Application:
 		get_by_id = get_user
 		get_user_by_id = get_user
 
-		def get_by_external_id(self,external_id:str) -> User|None:
+		def get_by_external_id(self,external_id:str) -> User:
 			"""
 			Get a user based on their external ID (if set).
 			:param external_id: The external ID of the user.
@@ -126,13 +126,13 @@ class Application:
 				"last_name": last_name
 			}
 
-			req: request = self.__session.post(f"{self.__panel_url}/api/application/users",data=payload)
+			req:request = self.__session.post(f"{self.__panel_url}/api/application/users",data=payload)
 			if req.status_code != 201:
 				TransformToObject(req.json())
 				raise Exception("Request failed!")
 
-			req_json: dict = req.json()
-			_u: User = TransformToObject(req_json)
+			req_json:dict = req.json()
+			_u:User = TransformToObject(req_json)
 			if not isinstance(_u, User):
 				raise Exception(f"Invalid request response!\n\nResponse: {dumps(req_json)}")
 
@@ -141,7 +141,34 @@ class Application:
 		new = create_user
 		create = create_user
 
-		# To-Add: PATCH, DELETE for /api/application/users/
+		def update_user(self,user_id:int,field:str,new_value:str) -> User:
+			"""
+			Update a user's information.
+			:param user_id: The ID of the user to be updated.
+			:param field: Field to be updated. Can be any of the following: email,username,first_name,last_name,language,password
+			:param new_value: New value for the field.
+			:return: Returns the new User object with the updated information. (Will be the same as the passed user object if changed field is password).
+			"""
+
+			assert field in ["email","username","first_name","last_name","language","password"], "Invalid field! Can only be any of the following: email,username,first_name,last_name,language,password"
+
+			payload:dict[str,str] = {
+				field: new_value
+			}
+
+			req:request = self.__session.post(f"{self.__panel_url}/api/application/users/{user_id}",data=payload)
+			if req.status_code != 200:
+				TransformToObject(req.json())
+				raise Exception("Request failed!")
+
+			req_json:dict = req.json()
+			_u:User = TransformToObject(req_json)
+			if not isinstance(_u, User):
+				raise Exception(f"Invalid request response!\n\nResponse: {dumps(req_json)}")
+
+			return _u
+
+		# To-Add: DELETE for /api/application/users/
 
 	class __Nodes:
 		def __init__(self,panel_url:str,session:Session) -> None:
