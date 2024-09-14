@@ -1,2 +1,7 @@
 /.idea/*
 /test.py
+/setup.py
+/build/
+/dist/
+/BuildingAndUploading.md
+/pterodactyl.egg-info/

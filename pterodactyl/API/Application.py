@@ -156,7 +156,7 @@ class Application:
 				field: new_value
 			}
 
-			req:request = self.__session.post(f"{self.__panel_url}/api/application/users/{user_id}",data=payload)
+			req:request = self.__session.patch(f"{self.__panel_url}/api/application/users/{user_id}",data=payload)
 			if req.status_code != 200:
 				TransformToObject(req.json())
 				raise Exception("Request failed!")
