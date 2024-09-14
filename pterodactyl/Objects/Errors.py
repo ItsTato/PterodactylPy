@@ -1,4 +1,4 @@
-class NotFoundHttpException(Exception):
+class PterodactylException(Exception):
 	def __init__(self,detail:str,status:int):
 		self.__detail:str = detail
 		self.__status:int = status
@@ -13,3 +13,11 @@ class NotFoundHttpException(Exception):
 	@property
 	def message(self) -> str:
 		return self.__message
+
+class NotFoundHttpException(PterodactylException):
+	def __init__(self,detail:str,status:int):
+		super().__init__(detail,status)
+
+class ValidationException(PterodactylException):
+	def __init__(self,detail:str,status:int):
+		super().__init__(detail,status)

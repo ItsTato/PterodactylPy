@@ -24,9 +24,10 @@ def TransformToObject(obj:dict[str,Any]) -> Any:
 				return u
 
 	if "errors" in obj:
+
 		errors:list[dict[str,str]] = obj["errors"]
 		for error in errors:
-			if error["code"] == "NotFoundHttpException":
-				raise Errors.NotFoundHttpException(error["detail"],int(error["status"]))
+			if getattr(Errors,error["code"]):
+				raise getattr(Errors,error["code"])(error["detail"],int(error["status"]))
 
 	raise Exception("Missing required object/errors attribute or package cannot deal with unknown object.")
