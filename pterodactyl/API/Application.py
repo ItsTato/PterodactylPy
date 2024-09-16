@@ -1,4 +1,5 @@
 from ..Objects import User
+from ..Objects.Errors import RequestFailed
 from ..TransformToObject import TransformToObject
 
 from json import dumps
@@ -43,7 +44,7 @@ class Application:
 			req:request = self.__session.get(f"{self.__panel_url}/api/application/users")
 			if req.status_code != 200:
 				TransformToObject(req.json()) # If there's an error to deal with it, it will be raised. Otherwise, default "Get request fail!"
-				raise Exception("Request fail!")
+				raise RequestFailed("Unknown error!",req.status_code)
 
 			req_json:dict = req.json()
 			_ls:list = TransformToObject(req_json)
@@ -71,12 +72,10 @@ class Application:
 			req:request = self.__session.get(f"{self.__panel_url}/api/application/users/{user_id}")
 			if req.status_code != 200:
 				TransformToObject(req.json()) # If there's an error to deal with it, it will be raised. Otherwise, default "Request failed!"
-				raise Exception("Request failed!")
+				raise RequestFailed("Unknown error!",req.status_code)
 
 			req_json:dict = req.json()
 			_u:User = TransformToObject(req_json)
-			if not isinstance(_u,User):
-				raise Exception(f"Invalid request response!\n\nResponse: {dumps(req_json)}")
 
 			return _u
 		# Aliases
@@ -98,12 +97,10 @@ class Application:
 			req:request = self.__session.get(f"{self.__panel_url}/api/application/users/external/{external_id}")
 			if req.status_code != 200:
 				TransformToObject(req.json())
-				raise Exception("Request failed!")
+				raise RequestFailed("Unknown error!",req.status_code)
 
 			req_json:dict = req.json()
 			_u:User = TransformToObject(req_json)
-			if not isinstance(_u,User):
-				raise Exception(f"Invalid request response!\n\nResponse: {dumps(req_json)}")
 
 			return _u
 		# Aliases
@@ -129,12 +126,10 @@ class Application:
 			req:request = self.__session.post(f"{self.__panel_url}/api/application/users",data=payload)
 			if req.status_code != 201:
 				TransformToObject(req.json())
-				raise Exception("Request failed!")
+				raise RequestFailed("Unknown error!",req.status_code)
 
 			req_json:dict = req.json()
 			_u:User = TransformToObject(req_json)
-			if not isinstance(_u, User):
-				raise Exception(f"Invalid request response!\n\nResponse: {dumps(req_json)}")
 
 			return _u
 		# Aliases
@@ -159,16 +154,18 @@ class Application:
 			req:request = self.__session.patch(f"{self.__panel_url}/api/application/users/{user_id}",data=payload)
 			if req.status_code != 200:
 				TransformToObject(req.json())
-				raise Exception("Request failed!")
+				raise RequestFailed("Unknown error!",req.status_code)
 
 			req_json:dict = req.json()
 			_u:User = TransformToObject(req_json)
-			if not isinstance(_u, User):
-				raise Exception(f"Invalid request response!\n\nResponse: {dumps(req_json)}")
 
 			return _u
 
-		# To-Add: DELETE for /api/application/users/
+		def delete_user(self,user_id:int) -> None:
+			req:request = self.__session.delete(f"{self.__panel_url}/api/applications/users/{user_id}")
+			if req.status_code != 204:
+				TransformToObject(req.json())
+				raise RequestFailed("Unknown error!",req.status_code)
 
 	class __Nodes:
 		def __init__(self,panel_url:str,session:Session) -> None:

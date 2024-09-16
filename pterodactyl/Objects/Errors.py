@@ -14,6 +14,10 @@ class PterodactylException(Exception):
 	def message(self) -> str:
 		return self.__message
 
+class RequestFailed(PterodactylException):
+	# Used for when we don't have an exception based on the panel's ones
+	pass
+
 # Exceptions based on actual errors the panel may return.
 # If you know of any missing exceptions here, please just add it and submit a pull request!
 
