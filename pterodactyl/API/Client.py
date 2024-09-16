@@ -1,3 +1,5 @@
+# Work into the Client API has not started.
+
 from requests import Session
 
 class Client:

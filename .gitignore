@@ -1,6 +1,9 @@
 /.idea
-/test.py
+/.vscode
+/.venv
+/test*
 /b-and-r.md
 /build
 /dist
 /pterodactyl.egg-info
+*__pycache__

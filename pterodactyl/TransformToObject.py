@@ -1,9 +1,10 @@
-from .Objects import User, Errors
+from .Objects import Consistent, Errors
+from .Objects.Pterodactyl import User
 
 from typing import Any
 from datetime import datetime
 
-def TransformToObject(obj:dict[str,Any]) -> Any:
+def TransformToObject(cObj:Consistent,obj:dict[str,Any]) -> Any:
 	if "object" in obj:
 
 		if obj["object"] == "list":
@@ -11,10 +12,10 @@ def TransformToObject(obj:dict[str,Any]) -> Any:
 
 		if obj["object"] == "user":
 			if "admin" in obj["attributes"]:
-				u:User = User(obj["attributes"]["id"],obj["attributes"]["admin"],obj["attributes"]["username"],obj["attributes"]["email"],obj["attributes"]["first_name"],obj["attributes"]["last_name"],obj["attributes"]["language"])
+				u:User = User(cObj,False,obj["attributes"]["id"],obj["attributes"]["admin"],obj["attributes"]["username"],obj["attributes"]["email"],obj["attributes"]["first_name"],obj["attributes"]["last_name"],obj["attributes"]["language"])
 				return u
 			if "root_admin" in obj["attributes"]:
-				u:User = User(obj["attributes"]["id"],obj["attributes"]["root_admin"],obj["attributes"]["username"],obj["attributes"]["email"],obj["attributes"]["first_name"],obj["attributes"]["last_name"],obj["attributes"]["language"])
+				u:User = User(cObj,True,obj["attributes"]["id"],obj["attributes"]["root_admin"],obj["attributes"]["username"],obj["attributes"]["email"],obj["attributes"]["first_name"],obj["attributes"]["last_name"],obj["attributes"]["language"])
 				u.uuid = obj["attributes"]["uuid"]
 				u.external_identifier = obj["attributes"]["external_id"]
 				u.two_factor_auth = obj["attributes"]["2fa"]
