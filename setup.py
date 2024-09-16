@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pterodactyl",
-    version="0.0.2",
+    version="0.0.3",
     description="A Python wrapper for the Pterodactyl API.",
     author="ItsTato",
     author_email="thatpogcomputer@gmail.com",
