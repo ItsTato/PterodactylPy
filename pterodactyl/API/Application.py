@@ -1,7 +1,6 @@
-from ..Objects import Consistent
-from ..Objects.Pterodactyl import User, Node
+from ..Objects import Consistent, TransformToObject
 from ..Objects.Errors import RequestFailed
-from ..TransformToObject import TransformToObject
+from ..Objects.Pterodactyl import User, Node
 
 from json import dumps
 from requests import Session, Response

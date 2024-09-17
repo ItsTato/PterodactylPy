@@ -7,3 +7,4 @@
 /dist
 /pterodactyl.egg-info
 *__pycache__
+*out*.json
