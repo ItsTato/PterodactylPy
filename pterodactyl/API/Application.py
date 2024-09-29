@@ -50,7 +50,7 @@ class Application:
 			req_json:dict = req.json()
 			_ls:list = TransformToObject(self.__cObj,req_json)
 			if not isinstance(_ls,list):
-				raise Exception(f"Invalid request response!\n\nResponse: {dumps(req_json)}")
+				raise TypeError(f"Invalid request response!\n\nResponse: {dumps(req_json)}")
 			for _u in _ls:
 				users.append(TransformToObject(self.__cObj,_u))
 
@@ -66,8 +66,7 @@ class Application:
 			"""
 
 			# To-Add:
-			# Include parameters:
-			# - servers
+			# Include parameters
 
 			req:Response = self.__cObj.session.get(f"{self.__cObj.panel_url}/api/application/users/{user_id}")
 			if req.status_code != 200:
@@ -91,8 +90,7 @@ class Application:
 			"""
 
 			# To-Add:
-			# Include parameters:
-			# - servers
+			# Include parameters
 
 			req:Response = self.__cObj.session.get(f"{self.__cObj.panel_url}/api/application/users/external/{external_id}")
 			if req.status_code != 200:
@@ -104,7 +102,7 @@ class Application:
 
 			return _u
 		# Aliases
-		get_user_by_external_id = get_by_external_id
+		get_by_external_id = get_by_external_id
 
 		def create_user(self,email:str,username:str,first_name:str,last_name:str) -> User:
 			"""
@@ -189,13 +187,59 @@ class Application:
 			req_json:dict = req.json()
 			_ls:list = TransformToObject(self.__cObj,req_json)
 			if not isinstance(_ls,list):
-				raise Exception(f"Invalid request response!\n\nResponse: {dumps(req_json)}")
+				raise TypeError(f"Invalid request response!\n\nResponse: {dumps(req_json)}")
 			for _n in _ls:
 				nodes.append(TransformToObject(self.__cObj,_n))
 
 			return nodes
 		# Aliases
 		list_nodes = get_nodes
+
+		def get_node(self,node_id:int) -> Node:
+			"""
+			Get a node based on its ID.
+			:param node_id: The ID of the node.
+			:return: Returns the Node object or raises an exception (pterodactyl.Objects.Errors.NotFoundHttpException) if not found.
+			"""
+
+			# To-Add:
+			# Include parameters
+
+			req:Response = self.__cObj.session.get(f"{self.__cObj.panel_url}/api/application/nodes/{node_id}")
+			if req.status_code != 200:
+				TransformToObject(self.__cObj,req.json()) # If there's an error to deal with it, it will be raised. Otherwise, default "Request failed!"
+				raise RequestFailed("Unknown error!",req.status_code)
+
+			req_json:dict = req.json()
+			_n:Node = TransformToObject(self.__cObj,req_json)
+
+			return _n
+		# Aliases
+		get = get_node
+		get_by_id = get_node
+		get_user_by_id = get_node
+
+		def get_by_external_id(self,external_id:str) -> Node:
+			"""
+			Get a node based on their external ID (if set).
+			:param external_id: The external ID of the node.
+			:return: Returns the Node object or raises an exception (pterodactyl.Objects.Errors.NotFoundHttpException) if not found.
+			"""
+
+			# To-Add:
+			# Include parameters
+
+			req:Response = self.__cObj.session.get(f"{self.__cObj.panel_url}/api/application/nodes/external/{external_id}")
+			if req.status_code != 200:
+				TransformToObject(self.__cObj,req.json())
+				raise RequestFailed("Unknown error!",req.status_code)
+
+			req_json:dict = req.json()
+			_n:Node = TransformToObject(self.__cObj,req_json)
+
+			return _n
+		# Aliases
+		get_by_external_id = get_by_external_id
 
 	class __Locations:
 		def __init__(self,cObj:Consistent) -> None:
