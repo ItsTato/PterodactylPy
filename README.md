@@ -9,18 +9,15 @@
 A Python wrapper for the Pterodactyl API.
 
 ## Random Notes
+- [ ] Remove bloat
+- [ ] Remove all methods like "update_user"
 - [ ] Rewrite into async. Yes, that's right. I'm doing that.
 - [ ] [User].update(), [Node].delete(), etc.
 - - [x] User
 - - [ ] Allocations
 - - [ ] Nodes
-- [ ] .setter functions that update (as many details as they can) in panel
-- - [ ] User
-- - [ ] Allocations
-- - [ ] Nodes
 - [ ] Implement pagination
 - [ ] Add include arguments to everything
-- [ ] Improve update_user to allow for multiple fields at once
 
 ## Example
 
