@@ -9,6 +9,7 @@
 A Python wrapper for the Pterodactyl API.
 
 ## Random Notes
+- [ ] Rewrite into async. Yes, that's right. I'm doing that.
 - [ ] [User].update(), [Node].delete(), etc.
 - - [x] User
 - - [ ] Allocations
