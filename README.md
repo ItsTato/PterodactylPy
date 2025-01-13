@@ -8,10 +8,10 @@
 
 A Python wrapper for the Pterodactyl API.
 
-## Random Notes
-- [ ] Remove bloat
-- [ ] Remove all methods like "update_user"
+## Random Notes (Ordered in priority)
+- [x] Remove bloat
 - [ ] Rewrite into async. Yes, that's right. I'm doing that.
+- [ ] Remove all methods like "update_user". Make them more specific.
 - [ ] [User].update(), [Node].delete(), etc.
 - - [x] User
 - - [ ] Allocations
