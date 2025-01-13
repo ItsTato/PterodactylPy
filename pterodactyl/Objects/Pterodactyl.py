@@ -6,6 +6,8 @@ from requests import Response
 from typing import Any
 
 def TransformToObject(cObj:Consistent,obj:dict[str,Any]) -> Any:
+	assert isinstance(cObj,Consistent), "Unsupported consistent object."
+
 	if "object" in obj:
 
 		if obj["object"] == "list":
