@@ -1,18 +1,9 @@
 class PterodactylException(Exception):
 	def __init__(self,detail:str,status:int):
-		self.__detail:str = detail
-		self.__status:int = status
-		self.__message:str = f"[{self.__status}] {self.__detail}"
-		super().__init__(self.__message)
-	@property
-	def detail(self) -> str:
-		return self.__detail
-	@property
-	def status(self) -> int:
-		return self.__status
-	@property
-	def message(self) -> str:
-		return self.__message
+		self.detail:str = detail
+		self.status:int = status
+		self.message:str = f"[{self.status}] {self.detail}"
+		super().__init__(self.message)
 
 class RequestFailed(PterodactylException):
 	# Used for when we don't have an exception based on the panel's ones
