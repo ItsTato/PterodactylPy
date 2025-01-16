@@ -9,6 +9,9 @@
 A Python wrapper for the Pterodactyl API.
 
 ## Random Notes (Ordered in priority)
+
+I've switched to a different development methodology. Instead of building this blindly, I'm going to make use of it in another project. This way, I can slowly add what I really need and fix the most important bugs. I think this gives me the right to call it, "purpose-built" as well, no?
+
 - [x] Remove bloat
 - [x] ~~Rewrite into async. Yes, that's right. I'm doing that.~~ No, I'm not doing that. Mind fog cleared.
 - [ ] Remove all methods like "update_user". Make them more specific.
