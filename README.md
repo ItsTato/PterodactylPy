@@ -1,4 +1,4 @@
-# PterodactylPy
+# Pterodactyl.py
 
 > [!CAUTION]
 > Package is still in very early development. Do not use in a production environment!
@@ -10,7 +10,7 @@ A Python wrapper for the Pterodactyl API.
 
 ## Random Notes (Ordered in priority)
 - [x] Remove bloat
-- [ ] Rewrite into async. Yes, that's right. I'm doing that.
+- [x] ~~Rewrite into async. Yes, that's right. I'm doing that.~~ No, I'm not doing that. Mind fog cleared.
 - [ ] Remove all methods like "update_user". Make them more specific.
 - [ ] [User].update(), [Node].delete(), etc.
 - - [x] User

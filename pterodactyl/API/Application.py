@@ -134,31 +134,6 @@ class Application:
 		new = create_user
 		create = create_user
 
-		def update_user(self,user_id:int,field:str,new_value:str) -> User:
-			"""
-			Update a user's information.
-			:param user_id: The ID of the user to be updated.
-			:param field: Field to be updated. Can be any of the following: email,username,first_name,last_name,language,password
-			:param new_value: New value for the field.
-			:return: Returns the new User object with the updated information. (Will be the same as the passed user object if changed field is password).
-			"""
-
-			assert field in ["email","username","first_name","last_name","language","password"], "Invalid field! Can only be any of the following: email,username,first_name,last_name,language,password"
-
-			payload:dict[str,str] = {
-				field: new_value
-			}
-
-			req:Response = self.__cObj.session.patch(f"{self.__cObj.panel_url}/api/application/users/{user_id}",data=payload)
-			if req.status_code != 200:
-				TransformToObject(self.__cObj,req.json())
-				raise RequestFailed("Unknown error!",req.status_code)
-
-			req_json:dict = req.json()
-			_u:User = TransformToObject(self.__cObj,req_json)
-
-			return _u
-
 		def delete_user(self,user_id:int) -> None:
 			"""
 			Deletes a user's account.
